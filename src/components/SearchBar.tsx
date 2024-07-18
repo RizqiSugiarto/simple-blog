@@ -32,7 +32,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearch }) => {
                     onChange={handleChangeInput}
                 />
             </div>
-            <div className="flex gap-10 justify-center mt-4">
+            <div className="flex md:gap-10 gap-5 justify-center mt-4">
                 {tags.map((item) => (
                     <ul
                         key={item.id}
@@ -46,7 +46,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setSearch }) => {
                             state.activeTag === item.name
                                 ? 'bg-purpleCustom text-white'
                                 : ''
-                        } p-1 pb-2 rounded-sm
+                        } p-1 pb-2 rounded-md
                         md:rounded-full cursor-pointer md:px-4
                         hover:scale-110 hover:border-[1px] 
                         border-purpleCustom transition-all duration-100 ease-in-out`}

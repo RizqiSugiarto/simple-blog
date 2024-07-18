@@ -20,7 +20,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ post, likes, liked, onLike, onClick
         <div className="m-4 cursor-pointer max-w-[420px]">
             <img
                 src={post.imageUrl}
-                className="w-full rounded-2xl object-cover h-[200px]"
+                className="w-full rounded-2xl object-cover max-h-[200px]"
                 onClick={() => onClick(post.id)}
             />
             <div className="min-h-[144px]" onClick={() => onClick(post.id)}>

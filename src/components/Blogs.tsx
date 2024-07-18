@@ -7,6 +7,7 @@ import useCheckLike from '@/hooks/useCheckLike';
 import { useAuthContext } from '@/context/authContext';
 import AuthModal from './AuthModal';
 import { Like } from '../types';
+import useCreateView from '@/hooks/useCreateView';
 
 interface BlogsProps {
     posts: BlogPost[];
@@ -19,6 +20,7 @@ const Blogs: React.FC<BlogsProps> = ({ posts }) => {
 
     const { CreateLikeErrMessage, CreateLikes } = useCreateLike();
     const { CheckLikeErrMessage, checkLikeStatus } = useCheckLike();
+    const {CreateViewErrMessage,CreateViews} = useCreateView()
 
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [likes, setLikes] = useState<{ [key: string]: number }>(() => {
@@ -80,6 +82,7 @@ const Blogs: React.FC<BlogsProps> = ({ posts }) => {
 
     const handleClick = useCallback((blogId: string) => {
         navigate(`/blog/${blogId}`);
+        CreateViews(blogId)
     }, [navigate]);
 
     const openModal = () => {
@@ -90,12 +93,10 @@ const Blogs: React.FC<BlogsProps> = ({ posts }) => {
         setIsModalVisible(false);
     };
 
-    if (CheckLikeErrMessage || CreateLikeErrMessage) {
-        return <div>Error: {CheckLikeErrMessage || CreateLikeErrMessage}</div>;
+    if (CheckLikeErrMessage || CreateLikeErrMessage || CreateViewErrMessage) {
+        return <div>Error: {CheckLikeErrMessage || CreateLikeErrMessage || CreateViewErrMessage}</div>;
     }
-
-    console.log(likedPosts, "GINI")
-
+    
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-[100px] px-10 md:px-15 lg:px-32 gap-y-8">
             {posts.map((post: BlogPost) => (

@@ -28,10 +28,10 @@ const BlogDetail: React.FC = () => {
 
     return (
         <div className="flex justify-center mt-12">
-            <div className="md:w-[680px]">
+            <div className="md:w-[680px] w-[400px]">
                 <img
                     src={BlogById.imageUrl}
-                    className="rounded-2xl mt-5 mb-5 w-full md:h-[454px] h-96"
+                    className="rounded-2xl mt-5 mb-5 w-full md:h-[300px] max-h-64"
                 />
                 <h3 className="text-red-500 text-sm">{BlogById.tag}</h3>
                 <h3 className="text-[23px] font-bold">{BlogById.title}</h3>
