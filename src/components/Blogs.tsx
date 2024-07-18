@@ -4,6 +4,8 @@ import BlogsItem from './BlogsItem';
 import { useNavigate } from 'react-router-dom';
 import useCreateLike from '@/hooks/useCreateLike';
 import useCheckLike from '@/hooks/useCheckLike';
+import { useAuthContext } from '@/context/authContext';
+import AuthModal from './AuthModal';
 import { Like } from '../types';
 
 interface BlogsProps {
@@ -12,9 +14,13 @@ interface BlogsProps {
 
 const Blogs: React.FC<BlogsProps> = ({ posts }) => {
     const navigate = useNavigate();
-    const { CreateLikeErrMessage, CreateLikeLoading, CreateLikes } = useCreateLike();
-    const { CheckLikeLoading, CheckLikeErrMessage, checkLikeStatus } = useCheckLike();
 
+    const {authUser} = useAuthContext()
+
+    const { CreateLikeErrMessage, CreateLikes } = useCreateLike();
+    const { CheckLikeErrMessage, checkLikeStatus } = useCheckLike();
+
+    const [isModalVisible, setIsModalVisible] = useState(false);
     const [likes, setLikes] = useState<{ [key: string]: number }>(() => {
         const initialLikes: { [key: string]: number } = {};
         posts.forEach(post => {
@@ -31,10 +37,9 @@ const Blogs: React.FC<BlogsProps> = ({ posts }) => {
             for (const post of posts) {
                 const req: Like = {
                     blogId: post.id,
-                    userId: 'c909703c-6d2c-4bde-8515-db49825d3b6a' // Replace with actual userId
+                    userId: authUser?.userId! 
                 };
                 const isLiked = await checkLikeStatus(req);
-                console.log(isLiked, "DAPET")
                 likedPostsStatus[post.id] = isLiked;
             }
             setLikedPosts(likedPostsStatus);
@@ -45,9 +50,15 @@ const Blogs: React.FC<BlogsProps> = ({ posts }) => {
 
     const handleLike =  (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, blogId: string) => {
         e.preventDefault()
+
+        if(!authUser?.userId) {
+            openModal()
+            return
+        }
+
         const req: Like = {
             blogId: blogId,
-            userId: 'c909703c-6d2c-4bde-8515-db49825d3b6a' // Replace with actual userId
+            userId: authUser.userId 
         };
 
         const isLiked = likedPosts[blogId];
@@ -64,7 +75,6 @@ const Blogs: React.FC<BlogsProps> = ({ posts }) => {
             [blogId]: !isLiked
         }));
 
-        // Update the like status on the server using CreateLikes function
         CreateLikes(req);
     };
 
@@ -72,9 +82,13 @@ const Blogs: React.FC<BlogsProps> = ({ posts }) => {
         navigate(`/blog/${blogId}`);
     }, [navigate]);
 
-    // if (CreateLikeLoading || CheckLikeLoading) {
-    //     return <div>Loading...</div>;
-    // }
+    const openModal = () => {
+        setIsModalVisible(true);
+    };
+
+    const closeModal = () => {
+        setIsModalVisible(false);
+    };
 
     if (CheckLikeErrMessage || CreateLikeErrMessage) {
         return <div>Error: {CheckLikeErrMessage || CreateLikeErrMessage}</div>;
@@ -94,6 +108,7 @@ const Blogs: React.FC<BlogsProps> = ({ posts }) => {
                     onClick={handleClick}
                 />
             ))}
+            <AuthModal isVisible={isModalVisible} onClose={closeModal} />
         </div>
     );
 };

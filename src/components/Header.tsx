@@ -32,7 +32,7 @@ const Header: React.FC = () => {
         useGetProfile();
     const { updateProfileLoading, updateProfileErrMessage, updateProfile } =
         useUpdateProfile();
-    const { LogoutLoading, LogoutErrMessage, logout } = useLogout();
+    const { LogoutErrMessage, logout } = useLogout();
 
     const dialogRef = useRef<HTMLDialogElement>(null);
     const inputFileRef = useRef<HTMLInputElement>(null);
@@ -117,6 +117,9 @@ const Header: React.FC = () => {
         }
         if (updateProfileErrMessage && updateProfileErrMessage.trim() !== '') {
             showToast(updateProfileErrMessage, 'error');
+        }
+        if (LogoutErrMessage) {
+            showToast(LogoutErrMessage, 'error')
         }
     }, [getProfileErrMessage, updateProfileErrMessage]);
 
