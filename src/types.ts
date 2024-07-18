@@ -4,10 +4,10 @@ export interface User {
     imageUrl: string;
 }
 
-export type Like =  {
+export type Like = {
     blogId: string;
     userId: string;
-}
+};
 
 export interface BlogPost {
     id: string;

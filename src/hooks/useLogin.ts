@@ -6,28 +6,26 @@ import { LoginRequest } from '@/types';
 const BaseUrl = import.meta.env.VITE_BASE_URL;
 
 interface UseLoginProps {
-    loading: boolean;
-    errMessage: string;
-    isSuccess: boolean;
+    LoginLoading: boolean;
+    LoginErrMessage: string;
+    LoginIsSuccess: boolean;
     login: (loginData: LoginRequest) => Promise<void>;
 }
 
 const useLogin = (): UseLoginProps => {
-    const [loading, setLoading] = useState(false);
-    const [errMessage, setErrMessage] = useState<string>('');
-    const [isSuccess, setIsSuccess] = useState<boolean>(false);
+    const [LoginLoading, setLoginLoading] = useState(false);
+    const [LoginErrMessage, setLoginErrMessage] = useState<string>('');
+    const [LoginIsSuccess, setLoginIsSuccess] = useState<boolean>(false);
 
     const login = async (loginData: LoginRequest): Promise<void> => {
-        setLoading(true);
-        setErrMessage('');
-
+        setLoginLoading(true);
         try {
             const response = await fetch(`${BaseUrl}/auth/login`, {
                 credentials: 'include',
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'x-web-app': 'cms'
+                    'x-web-app': 'web'
                 },
                 body: JSON.stringify(loginData)
             });
@@ -45,19 +43,20 @@ const useLogin = (): UseLoginProps => {
             const userData = jwtDecode(tokenVal!);
 
             localStorage.setItem('user-data', JSON.stringify(userData));
-            setIsSuccess(true);
+            setLoginIsSuccess(true);
+            console.log('UDAH SELESAI');
             // setAuthUser(Token);
         } catch (error: any) {
             console.error('Error during login:', error);
-            setErrMessage(
+            setLoginErrMessage(
                 error.message || 'Failed to login. Please try again.'
             );
         } finally {
-            setLoading(false);
+            setLoginLoading(false);
         }
     };
 
-    return { loading, errMessage, isSuccess, login };
+    return { LoginLoading, LoginErrMessage, LoginIsSuccess, login };
 };
 
 export default useLogin;

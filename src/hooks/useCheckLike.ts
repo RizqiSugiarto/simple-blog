@@ -26,13 +26,15 @@ const useCheckLike = (): UseCheckLikeProps => {
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.error || 'Failed to fetch like status');
+                throw new Error(
+                    errorData.error || 'Failed to fetch like status'
+                );
             }
 
             const data = await response.json();
             return data;
         } catch (error: any) {
-            setCheckLikeErrMessage(error.message)
+            setCheckLikeErrMessage(error.message);
             return false;
         } finally {
             setCheckLikeLoading(false);

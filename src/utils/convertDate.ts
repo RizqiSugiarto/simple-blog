@@ -15,7 +15,7 @@ const convertDate = (date: string): string => {
         'Nov',
         'Dec'
     ];
-    const parsedDate = parseISO(date); // Ensure the date is parsed correctly
+    const parsedDate = parseISO(date);
     const day = format(parsedDate, 'dd');
     const month = months[parsedDate.getUTCMonth()];
     const year = format(parsedDate, 'yyyy');

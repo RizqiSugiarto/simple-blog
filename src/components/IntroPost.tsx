@@ -1,12 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import convertDate from '@/utils/convertDate';
 
 interface IntroPostProps {
     post: any;
 }
 
 const IntroPost: React.FC<IntroPostProps> = ({ post }) => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const handleClick = () => {
         navigate(`/blog/${post.id}`);
@@ -26,7 +27,7 @@ const IntroPost: React.FC<IntroPostProps> = ({ post }) => {
                 className="
         rounded-2xl object-cover w-full h-[313px] max-w-lg ml-auto"
             />
-            <div className='cursor-pointer' onClick={handleClick}>
+            <div className="cursor-pointer" onClick={handleClick}>
                 <h4 className="text-red-500">{trimTag(post.tag)}</h4>
                 <div className="min-h-48">
                     <h2 className="text-[23px] font-bold mt-5">{post.title}</h2>
@@ -41,7 +42,9 @@ const IntroPost: React.FC<IntroPostProps> = ({ post }) => {
                     />
                     <div className="ml-2">
                         <h3 className="font-bold ">{post.user.name}</h3>
-                        <h3 className="text-gray-500">{post.createdAt}</h3>
+                        <h3 className="text-gray-500">
+                            {convertDate(post.createdAt)}
+                        </h3>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { AiFillLike } from 'react-icons/ai';
 import { BlogPost } from '../types';
+import convertDate from '@/utils/convertDate';
 
 interface BlogItemProps {
     post: BlogPost;
@@ -42,7 +43,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ post, likes, liked, onLike, onClick
                             {post.user.name}
                         </h3>
                         <h3 className="text-gray-500 text-[10px]">
-                            {post.createdAt}
+                            {convertDate(post.createdAt)}
                         </h3>
                     </div>
                     <button type="button" className="ml-3 mb-3 flex mt-6 cursor-pointer items-center" onClick={(e) => onLike(e,post.id)}>

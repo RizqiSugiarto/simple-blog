@@ -72,9 +72,9 @@ const Blogs: React.FC<BlogsProps> = ({ posts }) => {
         navigate(`/blog/${blogId}`);
     }, [navigate]);
 
-    if (CreateLikeLoading || CheckLikeLoading) {
-        return <div>Loading...</div>;
-    }
+    // if (CreateLikeLoading || CheckLikeLoading) {
+    //     return <div>Loading...</div>;
+    // }
 
     if (CheckLikeErrMessage || CreateLikeErrMessage) {
         return <div>Error: {CheckLikeErrMessage || CreateLikeErrMessage}</div>;

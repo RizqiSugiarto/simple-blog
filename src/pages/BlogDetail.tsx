@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { SlLike } from 'react-icons/sl';
 import useGetBlogById from '@/hooks/useGetById';
+import convertDate from '@/utils/convertDate';
 
 const BlogDetail: React.FC = () => {
     const { id } = useParams<{ id: string }>();
-    const { GetBlogByIdLoading, GetBlogByIdErrMessage, BlogById, getBlogById } = useGetBlogById();
+    const { GetBlogByIdLoading, GetBlogByIdErrMessage, BlogById, getBlogById } =
+        useGetBlogById();
 
     useEffect(() => {
         if (id) {
@@ -41,17 +42,15 @@ const BlogDetail: React.FC = () => {
                             className="w-[50px] rounded-full"
                         />
                         <div className="ml-2 mt-4">
-                            <h3 className="font-bold text-[12px]">Rizqi</h3>
+                            <h3 className="font-bold text-[12px]">
+                                {BlogById.user.name}
+                            </h3>
                             <h3 className="text-gray-500 text-[10px]">
-                                {new Date(BlogById.createdAt).toLocaleDateString()}
+                                {convertDate(BlogById.createdAt)}
                             </h3>
                         </div>
                     </div>
-                    <hr className='w-28 mt-3'/>
-                    <div className='flex mt-5 ml-2'>
-                        <SlLike className="hover:text-purpleCustom text-sm cursor-pointer"/>
-                        <span className="ml-2 text-sm ">140</span>
-                    </div>
+                    <hr className="w-28 mt-3" />
                 </div>
                 <div className="flex mt-6">
                     <h3>{BlogById.content}</h3>

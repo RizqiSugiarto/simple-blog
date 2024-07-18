@@ -5,7 +5,7 @@ const BaseUrl = import.meta.env.VITE_BASE_URL;
 interface UseCreateViewProps {
     CreateViewLoading: boolean;
     CreateViewErrMessage: string;
-    CreateViews: () => Promise<void>;
+    CreateViews: (blogId: string) => Promise<void>;
 }
 
 const useCreateView = (): UseCreateViewProps => {
@@ -13,11 +13,11 @@ const useCreateView = (): UseCreateViewProps => {
     const [CreateViewErrMessage, setCreateViewErrMessage] = useState('');
     // const [CreateView, setCreateView] = useState([]);
 
-    const CreateViews = async (): Promise<void> => {
+    const CreateViews = async (blogId: string): Promise<void> => {
         setCreateViewLoading(true);
         try {
-            const response = await fetch(`${BaseUrl}/blogs/user`, {
-                method: 'GET',
+            const response = await fetch(`${BaseUrl}/view/${blogId}`, {
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 }

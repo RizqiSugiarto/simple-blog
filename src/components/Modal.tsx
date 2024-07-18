@@ -12,10 +12,10 @@ const Modal: React.FC<ModalProps> = ({ isVisible, onClose, children }) => {
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
             <div className="bg-white rounded-lg p-8 shadow-lg w-full max-w-md">
-                <div className='flex justify-end'>
-                <button className="cursor-pointer" onClick={onClose}>
-                    ✕
-                </button>
+                <div className="flex justify-end">
+                    <button className="cursor-pointer" onClick={onClose}>
+                        ✕
+                    </button>
                 </div>
                 {children}
             </div>
