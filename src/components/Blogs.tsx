@@ -41,6 +41,7 @@ const Blogs: React.FC<BlogsProps> = ({ posts }) => {
                     blogId: post.id,
                     userId: authUser?.userId! 
                 };
+
                 const isLiked = await checkLikeStatus(req);
                 likedPostsStatus[post.id] = isLiked;
             }
