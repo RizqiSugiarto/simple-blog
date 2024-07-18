@@ -16,7 +16,7 @@ export interface BlogPost {
     title: string;
     content: string;
     createdAt: string;
-    like: Like[];
+    liked: Like[];
     user: User;
 }
 

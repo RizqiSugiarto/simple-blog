@@ -30,7 +30,7 @@ const useCheckLike = (): UseCheckLikeProps => {
             }
 
             const data = await response.json();
-            return data.message;
+            return data;
         } catch (error: any) {
             setCheckLikeErrMessage(error.message)
             return false;

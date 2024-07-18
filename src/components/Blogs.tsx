@@ -18,7 +18,7 @@ const Blogs: React.FC<BlogsProps> = ({ posts }) => {
     const [likes, setLikes] = useState<{ [key: string]: number }>(() => {
         const initialLikes: { [key: string]: number } = {};
         posts.forEach(post => {
-            initialLikes[post.id] = post.like.length;
+            initialLikes[post.id] = post.liked.length;
         });
         return initialLikes;
     });
@@ -33,8 +33,8 @@ const Blogs: React.FC<BlogsProps> = ({ posts }) => {
                     blogId: post.id,
                     userId: 'c909703c-6d2c-4bde-8515-db49825d3b6a' // Replace with actual userId
                 };
-
                 const isLiked = await checkLikeStatus(req);
+                console.log(isLiked, "DAPET")
                 likedPostsStatus[post.id] = isLiked;
             }
             setLikedPosts(likedPostsStatus);
@@ -79,6 +79,8 @@ const Blogs: React.FC<BlogsProps> = ({ posts }) => {
     if (CheckLikeErrMessage || CreateLikeErrMessage) {
         return <div>Error: {CheckLikeErrMessage || CreateLikeErrMessage}</div>;
     }
+
+    console.log(likedPosts, "GINI")
 
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-[100px] px-10 md:px-15 lg:px-32 gap-y-8">
