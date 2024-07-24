@@ -41,7 +41,7 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     const [authUser, setAuthUser] = useState<AuthUser | null>(null);
 
     useEffect(() => {
-        const token = Cookies.get('jwt');
+        const token = localStorage.getItem('access-token');
         try {
             if (token) {
                 const decodedToken: AuthUser = jwtDecode(token);

@@ -19,7 +19,6 @@ const IntroPost: React.FC<IntroPostProps> = ({ post }) => {
     const trimTag = (tag: string): string => {
         return tag.replace(/^"(.*)"$/, '$1');
     };
-    console.log(post, "GINI AJASIH")
     return (
         <div
             className="grid grid-cols-1 

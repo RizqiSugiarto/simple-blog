@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Cookies from 'js-cookie';
-import { jwtDecode } from 'jwt-decode';
+import { AuthUser } from '@/context/authContext';
 import { LoginRequest } from '@/types';
+import { useAuthContext } from '@/context/authContext';
 
 const BaseUrl = import.meta.env.VITE_BASE_URL;
 
@@ -16,6 +16,8 @@ const useLogin = (): UseLoginProps => {
     const [LoginLoading, setLoginLoading] = useState(false);
     const [LoginErrMessage, setLoginErrMessage] = useState<string>('');
     const [LoginIsSuccess, setLoginIsSuccess] = useState<boolean>(false);
+
+    const {setAuthUser} = useAuthContext()
 
     const login = async (loginData: LoginRequest): Promise<void> => {
         setLoginLoading(true);
@@ -36,16 +38,12 @@ const useLogin = (): UseLoginProps => {
                 throw new Error(responseBody.error || 'Failed to login');
             }
 
-            const tokenVal = Cookies.get('jwt');
-            // const Token: AuthUser = {
-            //     token: tokenVal
-            // };
-            const userData = jwtDecode(tokenVal!);
-
-            localStorage.setItem('user-data', JSON.stringify(userData));
+            localStorage.setItem('access-token', responseBody.data.token);
             setLoginIsSuccess(true);
-            console.log('UDAH SELESAI');
-            // setAuthUser(Token);
+            const userContextData: AuthUser = {
+                userId: responseBody.data.user.id
+            }
+            setAuthUser(userContextData);
         } catch (error: any) {
             console.error('Error during login:', error);
             setLoginErrMessage(

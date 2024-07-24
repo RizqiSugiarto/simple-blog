@@ -6,7 +6,6 @@ import Input from './Input';
 import FileInput from './InputFile';
 import showToast from '@/utils/toastify';
 import useUpdateProfile from '@/hooks/useUpdateProfile';
-import useLogout from '@/hooks/useLogout';
 
 type UpdateProfile = {
     userId: string;
@@ -32,7 +31,6 @@ const Header: React.FC = () => {
         useGetProfile();
     const { updateProfileLoading, updateProfileErrMessage, updateProfile } =
         useUpdateProfile();
-    const { LogoutErrMessage, logout } = useLogout();
 
     const dialogRef = useRef<HTMLDialogElement>(null);
     const inputFileRef = useRef<HTMLInputElement>(null);
@@ -83,16 +81,14 @@ const Header: React.FC = () => {
     };
 
     const handleLogout = () => {
-        logout();
+        localStorage.clear();
         setAuthUser(null);
     };
 
     useEffect(() => {
         if (authUser?.userId) {
             getProfile(authUser.userId);
-        } else {
-            console.error('authUser is undefined');
-        }
+        } 
     }, [authUser]);
 
     useEffect(() => {
@@ -117,9 +113,6 @@ const Header: React.FC = () => {
         }
         if (updateProfileErrMessage && updateProfileErrMessage.trim() !== '') {
             showToast(updateProfileErrMessage, 'error');
-        }
-        if (LogoutErrMessage) {
-            showToast(LogoutErrMessage, 'error')
         }
     }, [getProfileErrMessage, updateProfileErrMessage]);
 

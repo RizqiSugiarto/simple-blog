@@ -17,7 +17,7 @@ const useCreateLike = (): UseCreateLikeProps => {
     const CreateLikes = async (likeData: Like): Promise<void> => {
         setCreateLikeLoading(true);
         try {
-            const response = await fetch(`${BaseUrl}/like`, {
+            const response = await fetch(`${BaseUrl}/blogs/like`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

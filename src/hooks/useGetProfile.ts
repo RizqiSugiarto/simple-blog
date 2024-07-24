@@ -24,7 +24,6 @@ const useGetProfile = (): UseGetProfileProps => {
                 throw new Error('Failed to fetch profile');
             }
             const data = await response.json();
-            console.log(data);
             setProfile(data);
         } catch (error: any) {
             setGetProfileErrMessage(error.message);
