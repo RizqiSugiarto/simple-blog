@@ -34,7 +34,7 @@ const BlogItem: React.FC<BlogItemProps> = ({ post, likes, liked, onLike, onClick
             </div>
             <div className="flex items-center mt-5">
                 <img
-                    src={post.user.imageUrl}
+                    src={post.user.ImageUrl}
                     className="w-[35px] h-[35px] rounded-full"
                 />
                 <div className="flex items-center justify-between w-full">

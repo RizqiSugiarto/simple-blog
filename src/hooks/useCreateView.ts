@@ -16,7 +16,7 @@ const useCreateView = (): UseCreateViewProps => {
     const CreateViews = async (blogId: string): Promise<void> => {
         setCreateViewLoading(true);
         try {
-            const response = await fetch(`${BaseUrl}/view/${blogId}`, {
+            const response = await fetch(`${BaseUrl}/blogs/view/${blogId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

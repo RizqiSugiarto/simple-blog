@@ -16,7 +16,7 @@ const useCheckLike = (): UseCheckLikeProps => {
     const checkLikeStatus = async (likeData: Like): Promise<boolean> => {
         setCheckLikeLoading(true);
         try {
-            const response = await fetch(`${BaseUrl}/like/status`, {
+            const response = await fetch(`${BaseUrl}/blogs/status`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

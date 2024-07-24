@@ -1,7 +1,7 @@
 export interface User {
     id: string;
     name: string;
-    imageUrl: string;
+    ImageUrl: string;
 }
 
 export type Like = {

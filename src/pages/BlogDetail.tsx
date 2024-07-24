@@ -26,6 +26,8 @@ const BlogDetail: React.FC = () => {
         return <p>No blog found</p>;
     }
 
+    console.log(BlogById, "MASA GINI")
+
     return (
         <div className="flex justify-center mt-12">
             <div className="md:w-[680px] w-[400px]">
@@ -38,7 +40,7 @@ const BlogDetail: React.FC = () => {
                 <div className="mt-5">
                     <div>
                         <img
-                            src={BlogById.imageUrl}
+                            src={BlogById.user.ImageUrl}
                             className="w-[50px] rounded-full"
                         />
                         <div className="ml-2 mt-4">

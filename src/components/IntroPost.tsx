@@ -19,7 +19,7 @@ const IntroPost: React.FC<IntroPostProps> = ({ post }) => {
     const trimTag = (tag: string): string => {
         return tag.replace(/^"(.*)"$/, '$1');
     };
-
+    console.log(post, "GINI AJASIH")
     return (
         <div
             className="grid grid-cols-1 
@@ -41,7 +41,7 @@ const IntroPost: React.FC<IntroPostProps> = ({ post }) => {
                 </div>
                 <div className="flex items-center md:mt-5 mt-10">
                     <img
-                        src={post.user.imageUrl}
+                        src={post.user.ImageUrl}
                         className="w-[50px] h-[50px] rounded-full"
                     />
                     <div className="ml-2">
