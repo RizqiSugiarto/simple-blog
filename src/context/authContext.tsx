@@ -5,7 +5,6 @@ import React, {
     useEffect,
     useState
 } from 'react';
-import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 
 export type AuthUser = {
