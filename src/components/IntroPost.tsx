@@ -27,7 +27,7 @@ const IntroPost: React.FC<IntroPostProps> = ({ post }) => {
             <img
                 src={post.imageUrl}
                 className="
-        rounded-2xl object-cover w-full max-h-[250px] md:max-h-[313px] max-w-lg md:ml-auto"
+        rounded-2xl object-cover w-full h-64 md:max-h-[313px] max-w-lg md:ml-auto"
             />
             <div className="cursor-pointer" onClick={handleClick}>
                 <h4 className="text-red-500">{trimTag(post.tag)}</h4>
