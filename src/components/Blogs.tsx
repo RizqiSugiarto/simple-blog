@@ -37,19 +37,23 @@ const Blogs: React.FC<BlogsProps> = ({ posts }) => {
         const fetchLikesStatus = async () => {
             const likedPostsStatus: { [key: string]: boolean } = {};
             for (const post of posts) {
-                const req: Like = {
-                    blogId: post.id,
-                    userId: authUser?.userId! 
-                };
-
-                const isLiked = await checkLikeStatus(req);
-                likedPostsStatus[post.id] = isLiked;
+                if(authUser?.userId) {
+                    const req: Like = {
+                        blogId: post.id,
+                        userId: authUser?.userId! 
+                    };
+    
+                    const isLiked = await checkLikeStatus(req);
+                    likedPostsStatus[post.id] = isLiked;
+                } else {
+                    likedPostsStatus[post.id] = false
+                }
             }
             setLikedPosts(likedPostsStatus);
         };
 
         fetchLikesStatus();
-    }, [posts]);
+    }, [posts, authUser]);
 
     const handleLike =  (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, blogId: string) => {
         e.preventDefault()
